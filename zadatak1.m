@@ -1,0 +1,25 @@
+clc
+clear all
+
+f = @(x) abs(x.^4 - 5*x.^2 + 4);
+g = @(x) sin(3*x) + 2;
+a = -2;
+b = 1;
+
+%a)
+
+fg = @(x) abs(f(x) - g(x));
+povrsina = NANSLib.integrateSimpson(fg, a, b, 100)
+
+x = linspace(a, b, 100);
+fX = f(x);
+gX = g(x);
+plot(x, fX, 'blue'), hold on
+plot(x, gX, 'red'), hold on
+
+%b)
+
+a1 = -2;
+b1 = 0.45;
+fg2 = @(x) abs(f(x).^2 - g(x).^2);
+zapremina = pi*NANSLib.integrateSimpson(fg2, a1, b1, 100)

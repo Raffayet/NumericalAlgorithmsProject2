@@ -1,0 +1,29 @@
+clc;
+clear all;
+
+%leva strana diferencijalne jednacine: y'' - 2*y' + y/2*x.^2
+%desna strana diferencijalne jednacine: x - 3
+
+levaStrana = @(x, h) NANSLib.ddf(h) - 2*NANSLib.df(h) + x.^2*NANSLib.f(h)/2;
+desnaStrana = @(x) x - 3;
+
+%a)
+
+x1 = -1;
+x2 = 2;
+fX1 = 1;
+fX2 = 4;
+
+h = (x2 - x1)/1000;
+
+x = x1:h:x2;
+fX = NANSLib.finiteDifference(levaStrana, desnaStrana, x1, fX1, x2, fX2, h);
+plot(x, fX), hold on
+
+%b)
+
+x = 0.5;
+scatter(x, fX((x - x1*1000), 'red'), hold on
+fX(x*1000)
+
+

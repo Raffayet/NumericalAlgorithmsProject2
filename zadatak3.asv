@@ -1,0 +1,23 @@
+clc;
+clear all;
+
+%x = sqrt((10 + y'' - 4y*sin(2x))/12)
+%x^2 = (10 + y'' - 4y*sin(2x))/12
+%12x^2 = 10 + y'' - 4y*sin(2x)
+%y'' - 4y*sin(2x) = 12x^2 - 10
+
+diferencijalna = @(x, fX, dfX)
+levaStrana = @(x, h) NANSLib.ddf - 4*NANSLib.f*sin(2*x);
+desnaStrana = @(x) 12*x.^2 - 10;
+
+%a)
+
+nfX0 = [0, 4];
+x1 = -2;
+x2 = -2;
+
+h = (x2 - x1)/1000;
+
+x = x1:h:x2;
+fX = NANSLib.rk4n(x1, x2, h, nfX0, NANSLib.ddf);
+plot(x, fX), hold on
